@@ -14,7 +14,7 @@ const Password = ({user, config, changeUserData}) => {
                 Email: user.Email,
                 Password: password
             }
-            await axios.put('https://192.168.0.103:7000/api/User/UpdateUser', JSON.stringify(userData), config)
+            await axios.put('/api/User/UpdateUser', JSON.stringify(userData), config)
                 .then(response => {
                     if (response.status === 200) {
                         localStorage.setItem('userData', JSON.stringify(userData));

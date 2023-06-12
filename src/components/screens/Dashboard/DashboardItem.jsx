@@ -9,7 +9,7 @@ import Modal from "../../shared/Modals/Modal";
 import TaskItem from "./TaskItem";
 import axios from "axios";
 
-const DashboardItem = ({collection, changeMod, removeCollection, overview, getCollection}) => {
+const DashboardItem = ({collection, changeMod, removeCollection, overview}) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [record, setRecord] = useState(collection);
@@ -40,20 +40,20 @@ const DashboardItem = ({collection, changeMod, removeCollection, overview, getCo
     }
 
     const getTaskItem = (task, overview) => {
-        const date = new Date()
+        const date = new Date(task.CreationDateNorm)
+
         if (overview === 'Daily') {
-            if (task.datetime.getDate() === date.getDate() &&
-                task.datetime.getMonth() === date.getMonth() &&
-                task.datetime.getFullYear() === date.getFullYear())
+            if (date.getDate() === new Date().getDate() &&
+                date.getMonth() === new Date().getMonth() &&
+                date.getFullYear() === new Date().getFullYear())
                 return <TaskItem key={task.Id}
                                  task={task}
                                  changeMod={changeMod}
                                  removeTask={removeTask}/>
-        } else
-            return <TaskItem key={task.Id}
-                             task={task}
-                             changeMod={changeMod}
-                             removeTask={removeTask}/>
+        } else return <TaskItem key={task.Id}
+                                task={task}
+                                changeMod={changeMod}
+                                removeTask={removeTask}/>
     }
 
     // const markTask = (id) => {
@@ -120,11 +120,11 @@ const DashboardItem = ({collection, changeMod, removeCollection, overview, getCo
             </div>
             {isExpanded && <div>
                 <main className='flex flex-col gap-3 p-3'>
-                    {/*{record.ToDoList.map(task => getTaskItem(task, overview))}*/}
-                    {record.ToDoList.map(task => <TaskItem key={task.Id}
-                                                           task={task}
-                                                           changeMod={changeMod}
-                                                           removeTask={removeTask}/>)}
+                    {record.ToDoList.map(task => getTaskItem(task, overview))}
+                    {/*{record.ToDoList.map(task => <TaskItem key={task.Id}*/}
+                    {/*                                       task={task}*/}
+                    {/*                                       changeMod={changeMod}*/}
+                    {/*                                       removeTask={removeTask}/>)}*/}
 
                 </main>
                 <footer

@@ -58,9 +58,9 @@ const LogIn = () => {
                 Don`t have an account?&thinsp;
                 <Link to='/authorize/sign-in'>Sign in</Link>
             </p>
-            <Link to={`forgot-password`} className='flex justify-center items-end gap-2'>
-                Forgot password?
-            </Link>
+            {/*<Link to={`forgot-password`} className='flex justify-center items-end gap-2'>*/}
+            {/*    Forgot password?*/}
+            {/*</Link>*/}
         </div>
     );
 };

@@ -27,7 +27,7 @@ const TaskItem = ({task, markTask, removeTask, addSubtask}) => {
             Id: id,
             Name: current.Name,
             IsComplete: current.IsComplete,
-            CreationDate: current.CreationDate,
+            CreationDate: current.CreationDateNorm,
             ToDoId: task.Id
         }
         axios.put('/api/InnerToDo/UpdateInnerToDo', JSON.stringify(subtask), config)

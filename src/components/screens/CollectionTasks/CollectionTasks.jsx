@@ -32,17 +32,18 @@ const CollectionTasks = () => {
         const current = copy.find(t => t.Id === id);
         current.IsComplete = !current.IsComplete;
         setTasks(copy);
+        console.log(current)
         const task = {
             Id: current.Id,
             Name: current.Name,
             IsComplete: current.IsComplete,
             About: current.About,
-            CreationDate: current.CreationDate,
+            CreationDate: current.CreationDateNorm,
             InnerToDoList: current.InnerToDoList,
             CollectionId: current.CollectionId
 
         }
-        axios.put('/api/ToDo/UpdateToDo', JSON.stringify(task), config)
+        axios.put('https://192.168.0.101:7000/api/ToDo/UpdateToDo', JSON.stringify(task), config)
             .then(response => {
                 if (response.status === 200) {
                     console.log('success')

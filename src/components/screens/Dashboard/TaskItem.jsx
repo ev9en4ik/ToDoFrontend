@@ -31,7 +31,7 @@ const TaskItem = ({task, changeMod, removeTask}) => {
             Name: record.Name,
             IsComplete: !record.IsComplete,
             About: record.About,
-            CreationDate: record.CreationDate,
+            CreationDate: record.CreationDateNorm,
             InnerToDoList: record.InnerToDoList,
             CollectionId: record.CollectionId
 
@@ -54,7 +54,7 @@ const TaskItem = ({task, changeMod, removeTask}) => {
             Name: title,
             IsComplete: record.IsComplete,
             About: record.About,
-            CreationDate: record.CreationDate,
+            CreationDate: record.CreationDateNorm,
             InnerToDoList: record.InnerToDoList,
             CollectionId: record.CollectionId
         }
@@ -73,7 +73,7 @@ const TaskItem = ({task, changeMod, removeTask}) => {
 
     const removeSubtask = (id) => {
         console.log(id)
-        axios.delete('https://192.168.0.103:7000/api/InnerToDo/DeleteById', {params: {id: id}})
+        axios.delete('/api/InnerToDo/DeleteById', {params: {id: id}})
             .then(response => {
                 if (response.status === 200) {
                     console.log('success');

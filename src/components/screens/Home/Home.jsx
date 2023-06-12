@@ -9,8 +9,7 @@ const Home = () => {
                 <p className='text-base text-gray-400 mb-8'>Lorem ipsum dolor sit amet, <br/>consectetur adipisicing
                     elit. Eaque, soluta.</p>
                 <div>
-                    <Link to={`/authorize`}
-                          state={{logIn: true}}
+                    <Link to={`/authorize/log-in`}
                           className='m-2 p-2 text-white border-2 border-zinc-700 rounded-md hover:bg-zinc-700 transition-colors ease-in-out duration-300'>
                         Get started
                     </Link>

@@ -18,7 +18,7 @@ const SignIn = () => {
         const userData = {Id: 0, Login: login, Email: email, Password: password};
         e.preventDefault();
         console.log();
-        axios.post('https://192.168.0.103:7000/api/User/SignUp', JSON.stringify(userData), config)
+        axios.post('/api/User/SignUp', JSON.stringify(userData), config)
             .then(response => {
                 if (response.status === 200) {
                     console.log("success");

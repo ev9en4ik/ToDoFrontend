@@ -18,10 +18,10 @@ const SubtaskItem = ({optionsWeekday, subtask, changeMod, removeSubtask, taskId}
             Id: id,
             Name: title,
             IsComplete: !record.IsComplete,
-            CreationDate: new Date().toISOString(),
+            CreationDate: record.CreationDateNorm,
             ToDoId: taskId
         }
-        axios.put('https://192.168.0.103:7000/api/InnerToDo/UpdateInnerToDo', JSON.stringify(subtask), config)
+        axios.put('/api/InnerToDo/UpdateInnerToDo', JSON.stringify(subtask), config)
             .then(response => {
                 if (response.status === 200) {
                     console.log('success')
@@ -38,10 +38,10 @@ const SubtaskItem = ({optionsWeekday, subtask, changeMod, removeSubtask, taskId}
             Id: id,
             Name: title,
             IsComplete: false,
-            CreationDate: new Date().toISOString(),
+            CreationDate: record.CreationDateNorm,
             ToDoId: taskId
         }
-        axios.put('https://192.168.0.103:7000/api/InnerToDo/UpdateInnerToDo', JSON.stringify(subtask), config)
+        axios.put('/api/InnerToDo/UpdateInnerToDo', JSON.stringify(subtask), config)
             .then(response => {
                 if (response.status === 200) {
                     console.log('success')

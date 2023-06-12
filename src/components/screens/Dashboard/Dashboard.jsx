@@ -8,7 +8,6 @@ const Dashboard = () => {
     const [collections, setCollections] = useState([]);
     const [overview, setOverview] = useState('General');
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('userData')));
-
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -21,6 +20,7 @@ const Dashboard = () => {
     const getCollection = () => {
         axios.get('/api/ToDoCollection/UserCollections', {params: {id: user.Id}}, config)
             .then(response => {
+                console.log(response.data)
                 setCollections(response.data);
             })
             .catch(error => {
@@ -42,7 +42,6 @@ const Dashboard = () => {
             .catch(error => {
                 console.log(error);
             });
-
         setCollections(collections.filter(e => e.Id !== collection.Id));
     }
     const setOverviews = () => {
@@ -50,6 +49,33 @@ const Dashboard = () => {
             setOverview('Daily')
         else
             setOverview('General')
+    }
+
+    const renderCollection = (collection) => {
+
+        if (overview === 'Daily') {
+            let task = [];
+            task = collection.ToDoList.filter(todo => {
+                const date = new Date(todo.CreationDateNorm)
+
+                if (date.getDate() === new Date().getDate() &&
+                    date.getMonth() === new Date().getMonth() &&
+                    date.getFullYear() === new Date().getFullYear()) return todo
+
+
+            })
+            if (task.length !== 0) return <DashboardItem key={collection.Id}
+                                                         collection={collection}
+                                                         removeCollection={removeCollection}
+                                                         changeMod={changeMod}
+                                                         overview={overview}
+                                                         getCollection={getCollection}/>
+        } else return <DashboardItem key={collection.Id}
+                                     collection={collection}
+                                     removeCollection={removeCollection}
+                                     changeMod={changeMod}
+                                     overview={overview}
+                                     getCollection={getCollection}/>
     }
 
     return (
@@ -71,12 +97,14 @@ const Dashboard = () => {
                 </div>
                 <div className='flex flex-wrap gap-4'>
                     {
-                        collections.map(collection => <DashboardItem key={collection.Id}
-                                                                     collection={collection}
-                                                                     removeCollection={removeCollection}
-                                                                     changeMod={changeMod}
-                                                                     overview={overview}
-                                                                     getCollection={getCollection}/>)
+                        collections.map(collection => collection.ToDoList.length !== 0 && renderCollection(collection))
+                        // collections.map(collection => collection.ToDoList.length !== 0 &&
+                        // <DashboardItem key={collection.Id}
+                        //                collection={collection}
+                        //                removeCollection={removeCollection}
+                        //                changeMod={changeMod}
+                        //                overview={overview}
+                        //                getCollection={getCollection}/>)
                     }
                 </div>
             </div>
